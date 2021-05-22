@@ -1506,6 +1506,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
                 throw new Exception("Vui lòng nhập từ khóa cần tìm kiếm!");
             }
             tongTrang = SinhVienDAO.getInstance().layTongSoBanGhiTimKiem(maLopGV, tuKhoa);
+            if(tongTrang == 0) {
+                throw new Exception("Không tìm thấy dữ liệu trong bảng");
+            }
             tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
             trangHienTai = 1;
             getOldData();

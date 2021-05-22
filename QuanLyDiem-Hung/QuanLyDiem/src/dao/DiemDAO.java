@@ -35,11 +35,11 @@ public class DiemDAO {
                     + "INNER JOIN LopDocLap ON Diem.maLopDocLap=LopDocLap.maLopDocLap "
                     + "INNER JOIN MON ON Mon.maMon=LopDocLap.maMon "
                     + "INNER JOIN Lop ON Lop.maLop=SinhVien.maLop "
-                    + "WHERE SinhVien.maLop = ? AND tenMon=N'" + tenMon + "' AND Diem.maLopDocLap=" + maLopDocLap + " AND "
+                    + "WHERE SinhVien.maLop = N'" + maLopGV + "' AND tenMon=N'" + tenMon + "' AND Diem.maLopDocLap=" + maLopDocLap + " AND "
                     + "maDiem NOT IN (SELECT TOP(" + (trang * 15 - 15) + ") Diem.maDiem FROM Diem ) "
                     + "ORDER BY dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,3)),"
                     + "dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,2)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,1))";
-            ResultSet rs = DataProvider.getInstance().executeQuery(query, maLopGV);
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, (Object) null);
             while (rs.next()) {
                 Diem diem = new Diem(rs);
                 dsDiem.add(diem);
@@ -59,8 +59,8 @@ public class DiemDAO {
                     + "INNER JOIN LopDocLap on Diem.maLopDocLap=LopDocLap.maLopDocLap "
                     + "INNER JOIN Mon ON Mon.maMon=LopDocLap.maMon "
                     + "INNER JOIN SinhVien ON SinhVien.maSinhVien=Diem.maSinhVien "
-                    + "WHERE SinhVien.maLop = ? AND tenMon = N'" + tenMon + "' AND Diem.maLopDocLap = " + maLopDocLap;
-            ResultSet rs = DataProvider.getInstance().executeQuery(query, maLopGV);
+                    + "WHERE SinhVien.maLop = N'" + maLopGV + "' AND tenMon = N'" + tenMon + "' AND Diem.maLopDocLap = " + maLopDocLap;
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, (Object) null);
             while (rs.next()) {
                 banGhi = rs.getInt("soBanGhi");
             }
@@ -71,7 +71,7 @@ public class DiemDAO {
         }
         return banGhi;
     }
-    
+
     public int layTongSoBanGhiTimKiem(String maLopGV, String tuKhoa) {
         int banGhi = 0;
         try {
@@ -173,7 +173,7 @@ public class DiemDAO {
         }
         return kq;
     }
-    
+
     public int kiemTraDaTonTaiDiem(int maSV, String tenMon, int hocKy) {
         int check = 0;
         try {
@@ -188,5 +188,21 @@ public class DiemDAO {
             DataProvider.getInstance().closeConection();
         }
         return check;
+    }
+
+    public int layHocKyLonNhat(int maSV) {
+        int hocKy = 0;
+        try {
+            String query = "SELECT MAX(hocKy) as N'hocKy' from Diem WHERE maSinhVien = ? ";
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, maSV);
+            while (rs.next()) {
+                hocKy = rs.getInt("hocKy");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            DataProvider.getInstance().closeConection();
+        }
+        return hocKy;
     }
 }
