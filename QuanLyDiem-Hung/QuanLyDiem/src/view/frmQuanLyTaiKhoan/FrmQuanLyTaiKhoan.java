@@ -24,7 +24,10 @@ import ui.CustomTableTaiKhoan;
 import ui.RoundedPanel;
 
 public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
-
+    
+    private boolean isClick;
+    private String idChanged;
+    private int sizeChanged;
     /**
      * Loai dialog
      */
@@ -68,7 +71,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             new Font("Segoe UI", Font.BOLD, 16),
             BorderFactory.createEmptyBorder(), true
     );
-
+    
     public FrmQuanLyTaiKhoan() {
         initComponents();
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -80,7 +83,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             cbbMaLop.addItem(l.getMaLop());
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -814,42 +817,62 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
 
     private void btnTrangDauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseEntered
         hoverBtn(pnTrangDau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangDauMouseEntered
 
     private void btnTrangDauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseExited
-        hoverBtn(pnTrangDau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangDau, false);
+        } else
+            pnTrangDau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangDauMouseExited
 
     private void btnTrangTruocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseEntered
         hoverBtn(pnTrangTruoc, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangTruocMouseEntered
 
     private void btnTrangTruocMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseExited
-        hoverBtn(pnTrangTruoc, false);
+        if (!isClick) {
+            hoverBtn(pnTrangTruoc, false);
+        } else
+            pnTrangTruoc.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangTruocMouseExited
 
     private void btnTrangSauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseEntered
         hoverBtn(pnTrangSau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangSauMouseEntered
 
     private void btnTrangSauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseExited
-        hoverBtn(pnTrangSau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangSau, false);
+        } else
+            pnTrangSau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangSauMouseExited
 
     private void btnTrangCuoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseEntered
         hoverBtn(pnTrangCuoi, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangCuoiMouseEntered
 
     private void btnTrangCuoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseExited
-        hoverBtn(pnTrangCuoi, false);
+        if (!isClick) {
+            hoverBtn(pnTrangCuoi, false);
+        } else
+            pnTrangCuoi.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangCuoiMouseExited
 
     private void btnTimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseEntered
         hoverBtn(pnTimKiem, true);
+        isClick = false;
     }//GEN-LAST:event_btnTimKiemMouseEntered
 
     private void btnTimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseExited
-        hoverBtn(pnTimKiem, false);
+        if (!isClick) {
+            hoverBtn(pnTimKiem, false);
+        } else
+            pnTimKiem.setBackground(colorMenu);
     }//GEN-LAST:event_btnTimKiemMouseExited
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
@@ -870,10 +893,14 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
 
     private void btnReloadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseEntered
         hoverBtn(pnReload, true);
+        isClick = false;
     }//GEN-LAST:event_btnReloadMouseEntered
 
     private void btnReloadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseExited
-        hoverBtn(pnReload, false);
+        if (!isClick) {
+            hoverBtn(pnReload, false);
+        } else
+            pnReload.setBackground(colorMenu);
     }//GEN-LAST:event_btnReloadMouseExited
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
@@ -912,7 +939,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void txtTuKhoaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuKhoaFocusGained
-        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...")) {
+        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...") || txtTuKhoa.getText().equals("")) {
             txtTuKhoa.setText("");
             txtTuKhoa.setForeground(Color.BLACK);
         }
@@ -1087,7 +1114,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
         tongTrang = TaiKhoanDAO.getInstance().layTongSoBanGhi();
         tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
     }
-
+    
     private void loadDuLieu() {
         dsLops = LopDAO.getInstance().layDSLop();
         tblTaiKhoan.setModel(new CustomTableTaiKhoan(dsTKhoans));
@@ -1102,11 +1129,13 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     private void layDsTheoTrang(int trangHienTai) {
+        getOldData();
         dsTKhoans = TaiKhoanDAO.getInstance().layDSTaiKhoanTheoTrang(trangHienTai);
+        setClickState();
     }
-
+    
     private void hoverBtn(JPanel pn, boolean b) {
         if (b) {
             this.setCursor(handleMouse);
@@ -1144,7 +1173,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             pn.setBackground(colorMenu);
         }
     }
-
+    
     private void themSuaTaiKhoan() {
         try {
             if (dialogType) {
@@ -1195,7 +1224,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void hoverBtnDialog(JPanel pn, boolean b) {
         if (b) {
             this.setCursor(handleMouse);
@@ -1233,10 +1262,25 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             pn.setBackground(colorBtnDialog);
         }
     }
-
+    
     public void lamMoi() {
         laySoTrang();
         layDsTheoTrang(trangHienTai);
         loadDuLieu();
+    }
+    
+    private void getOldData() {
+        sizeChanged = dsTKhoans.size();
+        if (sizeChanged != 0) {
+            idChanged = dsTKhoans.get(0).getId();
+        } else {
+            idChanged = "-1";
+        }
+    }
+    
+    private void setClickState() {
+        if (!idChanged.equalsIgnoreCase(dsTKhoans.get(0).getId()) || sizeChanged != dsTKhoans.size()) {
+            isClick = true;
+        }
     }
 }

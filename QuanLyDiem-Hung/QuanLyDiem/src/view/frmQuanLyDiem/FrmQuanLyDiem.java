@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -39,7 +40,10 @@ import ui.RoundedPanel;
  * @author hoang
  */
 public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
-
+    
+    private boolean isClick;
+    private int idChanged;
+    private int sizeChanged;
     /**
      * Trang thai bang
      */
@@ -81,11 +85,11 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
     private int tongTrang = 0;
     private int trangHienTai = 1;
     private String maLopGV;
-
+    
     public String getMaLopGV() {
         return maLopGV;
     }
-
+    
     public void setMaLopGV(String maLopGV) {
         this.maLopGV = maLopGV;
     }
@@ -1141,7 +1145,9 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         if (trangHienTai < tongTrang) {
             trangHienTai++;
             if (dangTimKiem) {
+                getOldData();
                 dsDiem = DiemDAO.getInstance().layTTDiemTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+                setClickState();
             } else {
                 layDsTheoTrang(trangHienTai, dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap(), dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon());
             }
@@ -1152,7 +1158,9 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
     private void btnTrangCuoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseClicked
         trangHienTai = tongTrang;
         if (dangTimKiem) {
+            getOldData();
             dsDiem = DiemDAO.getInstance().layTTDiemTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
         } else {
             layDsTheoTrang(trangHienTai, dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap(), dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon());
         }
@@ -1163,7 +1171,9 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         if (trangHienTai > 1) {
             trangHienTai--;
             if (dangTimKiem) {
+                getOldData();
                 dsDiem = DiemDAO.getInstance().layTTDiemTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+                setClickState();
             } else {
                 layDsTheoTrang(trangHienTai, dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap(), dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon());
             }
@@ -1174,7 +1184,9 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
     private void btnTrangDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseClicked
         trangHienTai = 1;
         if (dangTimKiem) {
+            getOldData();
             dsDiem = DiemDAO.getInstance().layTTDiemTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
         } else {
             layDsTheoTrang(trangHienTai, dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap(), dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon());
         }
@@ -1183,42 +1195,62 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
 
     private void btnTrangDauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseEntered
         hoverBtn(pnTrangDau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangDauMouseEntered
 
     private void btnTrangDauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseExited
-        hoverBtn(pnTrangDau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangDau, false);
+        } else
+            pnTrangDau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangDauMouseExited
 
     private void btnTrangTruocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseEntered
         hoverBtn(pnTrangTruoc, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangTruocMouseEntered
 
     private void btnTrangTruocMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseExited
-        hoverBtn(pnTrangTruoc, false);
+        if (!isClick) {
+            hoverBtn(pnTrangTruoc, false);
+        } else
+            pnTrangTruoc.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangTruocMouseExited
 
     private void btnTrangSauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseEntered
         hoverBtn(pnTrangSau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangSauMouseEntered
 
     private void btnTrangSauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseExited
-        hoverBtn(pnTrangSau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangSau, false);
+        } else
+            pnTrangSau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangSauMouseExited
 
     private void btnTrangCuoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseEntered
         hoverBtn(pnTrangCuoi, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangCuoiMouseEntered
 
     private void btnTrangCuoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseExited
-        hoverBtn(pnTrangCuoi, false);
+        if (!isClick) {
+            hoverBtn(pnTrangCuoi, false);
+        } else
+            pnTrangCuoi.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangCuoiMouseExited
 
     private void btnTimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseEntered
         hoverBtn(pnTimKiem, true);
+        isClick = false;
     }//GEN-LAST:event_btnTimKiemMouseEntered
 
     private void btnTimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseExited
-        hoverBtn(pnTimKiem, false);
+        if (!isClick) {
+            hoverBtn(pnTimKiem, false);
+        } else
+            pnTimKiem.setBackground(colorMenu);
     }//GEN-LAST:event_btnTimKiemMouseExited
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
@@ -1305,7 +1337,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void txtTuKhoaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuKhoaFocusGained
-        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...")) {
+        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...")||txtTuKhoa.getText().equals("")) {
             txtTuKhoa.setText("");
             txtTuKhoa.setForeground(Color.BLACK);
         }
@@ -1353,10 +1385,14 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
 
     private void btnLamMoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseEntered
         hoverBtn(pnLamMoi, true);
+        isClick = false;
     }//GEN-LAST:event_btnLamMoiMouseEntered
 
     private void btnLamMoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseExited
-        hoverBtn(pnLamMoi, false);
+        if (!isClick) {
+            hoverBtn(pnLamMoi, false);
+        } else
+            pnLamMoi.setBackground(colorMenu);
     }//GEN-LAST:event_btnLamMoiMouseExited
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
@@ -1369,7 +1405,9 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             tongTrang = DiemDAO.getInstance().layTongSoBanGhiTimKiem(maLopGV, tuKhoa);
             tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
             trangHienTai = 1;
+            getOldData();
             dsDiem = DiemDAO.getInstance().layTTDiemTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
             loadDuLieu();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1412,7 +1450,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 }
                 txtTenSinhVien.setText(SinhVienDAO.getInstance().layTenSVTheoMa(Integer.parseInt(txtMaSinhVien.getText())));
             } catch (Exception e) {
-
+                
             }
         }
     }//GEN-LAST:event_txtMaSinhVienKeyReleased
@@ -1627,7 +1665,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         tongTrang = DiemDAO.getInstance().layTongSoBanGhi(maLopGV, tenMon, maLopDocLap);
         tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
     }
-
+    
     private void loadDuLieu() {
         tblDiem.setModel(new CustomTableDiem(dsDiem));
         lblSoTrang.setText(trangHienTai + "/" + tongTrang);
@@ -1641,11 +1679,13 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     private void layDsTheoTrang(int trangHienTai, int maLopDocLap, String tenMon) {
+        getOldData();
         dsDiem = DiemDAO.getInstance().layTTDiemTheoTrang(maLopGV, trangHienTai, maLopDocLap, tenMon);
+        setClickState();
     }
-
+    
     private void hoverBtn(JPanel pn, boolean b) {
         if (b) {
             this.setCursor(handleMouse);
@@ -1683,7 +1723,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             pn.setBackground(colorMenu);
         }
     }
-
+    
     private void hoverBtnDialog(JPanel pn, boolean b) {
         if (b) {
             this.setCursor(handleMouse);
@@ -1721,7 +1761,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             pn.setBackground(colorBtnDialog);
         }
     }
-
+    
     private void themSuaDiem() {
         try {
             String reg = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
@@ -1845,7 +1885,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void khoiTaoDialogVaForm() {
 //        dialogDiem.setShape(new RoundRectangle2D.Double(0, 0, dialogDiem.getWidth(), dialogDiem.getHeight(), 50, 50));
         dialogDiem.setLocationRelativeTo(null);
@@ -1856,6 +1896,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         cbbNamTao.setBackground(Color.WHITE);
         cbbLopDocLap.setBackground(Color.WHITE);
         cbbMaLopDocLap.setBackground(Color.WHITE);
+        
 
         //show data cbb Học Kỳ
         String[] hocKy = new String[16];
@@ -1876,7 +1917,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         cbbMon.setModel(new DefaultComboBoxModel(tenMon));
         cbbTenMon.setModel(new DefaultComboBoxModel(tenMon));
     }
-
+    
     private void xoaTrang() {
         txtDiemHS2.setText("");
         txtDiemKTHP.setText("");
@@ -1888,7 +1929,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         cbbMon.setSelectedIndex(0);
         cbbHocKy.setSelectedIndex(0);
     }
-
+    
     private void loadInfor() {
         tblShowInfor.setModel(new CustomTableInforSV(SinhVienDAO.getInstance().layMaVaTenSVTheoLop(maLopGV)));
         for (int i = 0; i < tblShowInfor.getColumnCount(); i++) {
@@ -1901,7 +1942,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     private void thayDoiDiem() {
         int soTC = MonDAO.getInstance().laySoTinChiTheoTenMon(dsMon.get(cbbMon.getSelectedIndex()).getTenMon());
         if (soTC == 1) {
@@ -1925,7 +1966,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             txtDiemTX2.setEditable(true);
         }
     }
-
+    
     private void hienThiTTLopDL() {
         if (dialogType) {
             dsLopDocLap = LopDocLapDAO.getInstance().layNamHocTheoTenMon(cbbMon.getItemAt(cbbMon.getSelectedIndex()));
@@ -1973,7 +2014,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 i++;
             }
             cbbNamTao.setModel(new DefaultComboBoxModel(namHoc));
-
+            
             String[] kyHoc = new String[dsLopDocLap.size()];
             int j = 0;
             for (LopDocLap lopDocLap : dsLopDocLap) {
@@ -1981,7 +2022,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 j++;
             }
             cbbKyTao.setModel(new DefaultComboBoxModel(kyHoc));
-
+            
             String[] maLopDL = new String[dsLopDocLap.size()];
             int k = 0;
             for (LopDocLap lopDocLap : dsLopDocLap) {
@@ -1991,7 +2032,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             cbbLopDocLap.setModel(new DefaultComboBoxModel(maLopDL));
         }
     }
-
+    
     private void hienThiMaLopDocLapForm() {
         //show data cbb mã lớp độc lập
         dsLopDocLap = LopDocLapDAO.getInstance().layDSLopDocLap(dsMon.get(cbbTenMon.getSelectedIndex()));
@@ -2003,7 +2044,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         }
         cbbMaLopDocLap.setModel(new DefaultComboBoxModel(maLopDocLap));
     }
-
+    
     private void tinhDiemTBCHK(int maSV) {
         int dem = 0;
         int check = 0;
@@ -2019,7 +2060,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             }
             j++;
         }
-
+        
         for (int i = 0; i < dsTichLuy.size() - 1; i++) {
             if (diemTL[i] < 0.8 && diemTL[i + 1] < 1 && dsTichLuy.get(i).getHky() == 1) {
                 check = 1;
@@ -2027,14 +2068,14 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 check = 1;
             }
         }
-
+        
         if (dem < 3) {
             SinhVienDAO.getInstance().thayDoiTrangThaiSV(1, maSV);
         } else {
             SinhVienDAO.getInstance().thayDoiTrangThaiSV(2, maSV);
             return;
         }
-
+        
         if (check == 1) {
             SinhVienDAO.getInstance().thayDoiTrangThaiSV(2, maSV);
             return;
@@ -2042,7 +2083,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             SinhVienDAO.getInstance().thayDoiTrangThaiSV(1, maSV);
         }
     }
-
+    
     public void lamMoi() {
         dangTimKiem = false;
         txtTuKhoa.setText("");
@@ -2050,5 +2091,20 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
         trangHienTai = 1;
         layDsTheoTrang(trangHienTai, dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap(), dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon());
         loadDuLieu();
+    }
+    
+    private void getOldData() {
+        sizeChanged = dsDiem.size();
+        if (sizeChanged != 0) {
+            idChanged = dsDiem.get(0).getMaDiem();
+        } else {
+            idChanged = -1;
+        }
+    }
+    
+    private void setClickState() {
+        if (idChanged != dsDiem.get(0).getMaDiem() || sizeChanged != dsDiem.size()) {
+            isClick = true;
+        }
     }
 }

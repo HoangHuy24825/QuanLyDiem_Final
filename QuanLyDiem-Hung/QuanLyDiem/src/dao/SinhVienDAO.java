@@ -37,11 +37,11 @@ public class SinhVienDAO {
     public ArrayList<SinhVien> layDSSVTheoTrang(String maLop, int trangHienTai) {
         ArrayList<SinhVien> dsSinhVien = new ArrayList<>();
         try {
-            String query = "SELECT TOP(15)* FROM SinhVien,Lop WHERE SinhVien.maLop=Lop.maLop AND SinhVien.maLop = ? AND maSinhVien NOT IN "
-                    + "(SELECT TOP(" + (trangHienTai * 15 - 15) + ") maSinhVien FROM SinhVien,Lop WHERE SinhVien.maLop=Lop.maLop "
+           String query = "SELECT TOP(15)* FROM SinhVien,Lop WHERE SinhVien.maLop=Lop.maLop AND SinhVien.maLop = ? AND maSinhVien NOT IN "
+                    + "(SELECT TOP(" + (trangHienTai * 15 - 15) + ") maSinhVien FROM SinhVien,Lop WHERE SinhVien.maLop=Lop.maLop AND SinhVien.maLop = ? "
                     + "ORDER BY dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,3)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,2)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,1))) "
                     + "ORDER BY dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,3)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,2)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,1))";
-            ResultSet rs = DataProvider.getInstance().executeQuery(query, maLop);
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, new Object[]{maLop,maLop});
             while (rs.next()) {
                 SinhVien sv = new SinhVien(rs);
                 dsSinhVien.add(sv);
@@ -94,10 +94,10 @@ public class SinhVienDAO {
                     + "WHERE SinhVien.maLop = ? AND (maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE N'%" + tuKhoa + "%') AND "
                     + "maSinhVien NOT IN (SELECT TOP (" + (trangHienTai * 15 - 15) + ") maSinhVien "
                     + "FROM SinhVien INNER JOIN Lop ON Lop.maLop=SinhVien.maLop "
-                    + "WHERE (maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE '%" + tuKhoa + "%') "
+                    + "WHERE SinhVien.maLop = ? AND (maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE '%" + tuKhoa + "%') "
                     + "ORDER BY dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,3)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,2)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,1))) "
                     + "ORDER BY dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,3)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,2)),dbo.F_ConvertToUnsigned(dbo.F_TachTen(tenSinhVien,1))";
-            ResultSet rs = DataProvider.getInstance().executeQuery(query, maLop);
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, new Object[]{maLop,maLop});
             while (rs.next()) {
                 SinhVien sv = new SinhVien(rs);
                 dsSV.add(sv);

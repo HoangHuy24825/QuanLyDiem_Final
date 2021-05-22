@@ -52,6 +52,9 @@ import view.FrmMain;
  */
 public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
 
+    private boolean isClick;
+    private int idChanged;
+    private int sizeChanged;
     int widthImage;
     int heightImage;
     private String tuKhoa;
@@ -60,7 +63,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     private final String namBD = "01/01/" + (year - 100);
     private final String namKT = "01/01/" + (year - 16);
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     /**
      * Trang thai bang
      */
@@ -109,7 +112,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
             new Font("Segoe UI", Font.BOLD, 16),
             BorderFactory.createEmptyBorder(), true
     );
-    
+
     private String maLopGV;
 
     public String getMaLopGV() {
@@ -119,7 +122,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     public void setMaLopGV(String maLopGV) {
         this.maLopGV = maLopGV;
     }
-    
+
     /**
      * Creates new form frmQuanLyDiem
      */
@@ -1210,7 +1213,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         if (trangHienTai < tongTrang) {
             trangHienTai++;
             if (dangTimKiem) {
+                getOldData();
                 dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+                setClickState();
             } else {
                 layDsTheoTrang(trangHienTai);
             }
@@ -1221,7 +1226,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     private void btnTrangCuoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseClicked
         trangHienTai = tongTrang;
         if (dangTimKiem) {
+            getOldData();
             dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
         } else {
             layDsTheoTrang(trangHienTai);
         }
@@ -1232,7 +1239,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         if (trangHienTai > 1) {
             trangHienTai--;
             if (dangTimKiem) {
+                getOldData();
                 dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+                setClickState();
             } else {
                 layDsTheoTrang(trangHienTai);
             }
@@ -1243,7 +1252,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     private void btnTrangDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseClicked
         trangHienTai = 1;
         if (dangTimKiem) {
+            getOldData();
             dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
         } else {
             layDsTheoTrang(trangHienTai);
         }
@@ -1252,42 +1263,62 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
 
     private void btnTrangDauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseEntered
         hoverBtn(pnTrangDau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangDauMouseEntered
 
     private void btnTrangDauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangDauMouseExited
-        hoverBtn(pnTrangDau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangDau, false);
+        } else
+            pnTrangDau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangDauMouseExited
 
     private void btnTrangTruocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseEntered
         hoverBtn(pnTrangTruoc, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangTruocMouseEntered
 
     private void btnTrangTruocMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangTruocMouseExited
-        hoverBtn(pnTrangTruoc, false);
+        if (!isClick) {
+            hoverBtn(pnTrangTruoc, false);
+        } else
+            pnTrangTruoc.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangTruocMouseExited
 
     private void btnTrangSauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseEntered
         hoverBtn(pnTrangSau, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangSauMouseEntered
 
     private void btnTrangSauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangSauMouseExited
-        hoverBtn(pnTrangSau, false);
+        if (!isClick) {
+            hoverBtn(pnTrangSau, false);
+        } else
+            pnTrangSau.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangSauMouseExited
 
     private void btnTrangCuoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseEntered
         hoverBtn(pnTrangCuoi, true);
+        isClick = false;
     }//GEN-LAST:event_btnTrangCuoiMouseEntered
 
     private void btnTrangCuoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangCuoiMouseExited
-        hoverBtn(pnTrangCuoi, false);
+        if (!isClick) {
+            hoverBtn(pnTrangCuoi, false);
+        } else
+            pnTrangCuoi.setBackground(colorMenu);
     }//GEN-LAST:event_btnTrangCuoiMouseExited
 
     private void btnTimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseEntered
         hoverBtn(pnTimKiem, true);
+        isClick = false;
     }//GEN-LAST:event_btnTimKiemMouseEntered
 
     private void btnTimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseExited
-        hoverBtn(pnTimKiem, false);
+        if (!isClick) {
+            hoverBtn(pnTimKiem, false);
+        } else
+            pnTimKiem.setBackground(colorMenu);
     }//GEN-LAST:event_btnTimKiemMouseExited
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
@@ -1320,9 +1351,10 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
             txtMaSinhVien.setText((SinhVienDAO.getInstance().layMaxMaSinhVien() + 1) + "");
             txtTenSinhVien.setText("");
             SinhVien s = new SinhVien();
-            for(SinhVien sv : dsSinhVien) {
-                if(sv.getLop().getMaLop().equals(maLopGV))
+            for (SinhVien sv : dsSinhVien) {
+                if (sv.getLop().getMaLop().equals(maLopGV)) {
                     s = sv;
+                }
             }
             cobLop.setSelectedItem(s.getLop().getTenLop());
             cobLop.setEnabled(false);
@@ -1386,7 +1418,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void txtTuKhoaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuKhoaFocusGained
-        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...")) {
+        if (txtTuKhoa.getText().equals("Nhập từ khóa tìm kiếm...") || txtTuKhoa.getText().equals("")) {
             txtTuKhoa.setText("");
             txtTuKhoa.setForeground(Color.BLACK);
         }
@@ -1410,8 +1442,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
             if (chose == JOptionPane.YES_OPTION) {
                 if (SinhVienDAO.getInstance().checkSinhVienCoDiem(sv.getMaSinhVien())) {
                     JOptionPane.showMessageDialog(null, "Không được phép xóa sinh viên đã có điểm!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else if (Controller.getInstance().xoa(sv)) {
+                } else if (Controller.getInstance().xoa(sv)) {
                     JOptionPane.showMessageDialog(null, "Xóa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     laySoTrang();
                     if (tongTrang < trangHienTai) {
@@ -1436,10 +1467,14 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
 
     private void btnLamMoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseEntered
         hoverBtn(pnLamMoi, true);
+        isClick = false;
     }//GEN-LAST:event_btnLamMoiMouseEntered
 
     private void btnLamMoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseExited
-        hoverBtn(pnLamMoi, false);
+        if (!isClick) {
+            hoverBtn(pnLamMoi, false);
+        } else
+            pnLamMoi.setBackground(colorMenu);
     }//GEN-LAST:event_btnLamMoiMouseExited
 
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
@@ -1473,7 +1508,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
             tongTrang = SinhVienDAO.getInstance().layTongSoBanGhiTimKiem(maLopGV, tuKhoa);
             tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
             trangHienTai = 1;
+            getOldData();
             dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrangTimKiem(maLopGV, trangHienTai, tuKhoa);
+            setClickState();
             loadDuLieu();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1631,7 +1668,9 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
     }
 
     private void layDsTheoTrang(int trangHienTai) {
+        getOldData();
         dsSinhVien = SinhVienDAO.getInstance().layDSSVTheoTrang(maLopGV, trangHienTai);
+        setClickState();
     }
 
     private void hoverBtn(JPanel pn, boolean b) {
@@ -1862,5 +1901,20 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         trangHienTai = 1;
         layDsTheoTrang(trangHienTai);
         loadDuLieu();
+    }
+
+    private void getOldData() {
+        sizeChanged = dsSinhVien.size();
+        if (sizeChanged != 0) {
+            idChanged = dsSinhVien.get(0).getMaSinhVien();
+        } else {
+            idChanged = -1;
+        }
+    }
+
+    private void setClickState() {
+        if (idChanged != dsSinhVien.get(0).getMaSinhVien() || sizeChanged != dsSinhVien.size()) {
+            isClick = true;
+        }
     }
 }
