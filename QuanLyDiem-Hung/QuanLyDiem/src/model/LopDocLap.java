@@ -75,4 +75,11 @@ public final class LopDocLap {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR);
         }
     }
+
+    @Override
+    public String toString() {
+        return "LopDocLap{" + "maLopDocLap=" + maLopDocLap + ", mon=" + mon + ", kyHoc=" + kyHoc + ", namHoc=" + namHoc + '}';
+    }
+    
+    
 }

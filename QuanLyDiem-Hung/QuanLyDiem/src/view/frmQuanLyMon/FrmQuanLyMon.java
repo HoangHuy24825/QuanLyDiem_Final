@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
@@ -152,13 +153,13 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        spinSoLopTao = new javax.swing.JSpinner();
         cbbTenMon = new javax.swing.JComboBox<>();
         cbbKyHoc = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         cbbNamHoc = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
         lblSoLopDaTao = new javax.swing.JLabel();
+        txtSoLopTao = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txtTuKhoa = new javax.swing.JTextField();
@@ -626,10 +627,6 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
         jLabel8.setToolTipText("");
         jLabel8.setPreferredSize(new java.awt.Dimension(33, 60));
 
-        spinSoLopTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        spinSoLopTao.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
-        spinSoLopTao.setPreferredSize(new java.awt.Dimension(400, 30));
-
         cbbTenMon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbbTenMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbTenMon.setPreferredSize(new java.awt.Dimension(400, 30));
@@ -665,6 +662,9 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
         lblSoLopDaTao.setText("Số lớp đã tạo:");
         lblSoLopDaTao.setPreferredSize(new java.awt.Dimension(200, 30));
 
+        txtSoLopTao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSoLopTao.setPreferredSize(new java.awt.Dimension(400, 30));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -678,21 +678,20 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblSoLopDaTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cbbTenMon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spinSoLopTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator4)
-                        .addComponent(jSeparator5)
-                        .addComponent(jSeparator6)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator7)
-                        .addComponent(cbbKyHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbbNamHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(cbbTenMon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator4)
+                    .addComponent(jSeparator5)
+                    .addComponent(jSeparator6)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator7)
+                    .addComponent(cbbKyHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbNamHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSoLopTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         jPanel8Layout.setVerticalGroup(
@@ -708,9 +707,9 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(spinSoLopTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSoLopTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -730,7 +729,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnQuayLai1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnDieuKhien1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dialogSinhLopDocLapLayout = new javax.swing.GroupLayout(dialogSinhLopDocLap.getContentPane());
@@ -1555,7 +1554,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
         DefaultComboBoxModel cbbMonModel = new DefaultComboBoxModel<>(dsTenMon);
         cbbTenMon.setModel(cbbMonModel);
         selectedRow = tblMonHoc.getSelectedRow();
-        if (selectedRow > 0 && selectedRow < dsMon.size()) {
+        if (selectedRow >= 0 && selectedRow < dsMon.size()) {
             Mon mon = dsMon.get(selectedRow);
             for (int j = 0; j < dsMonCbb.size(); j++) {
                 if (dsMonCbb.get(j).getMaMon() == mon.getMaMon()) {
@@ -1694,10 +1693,10 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnTrangSau;
     private javax.swing.JPanel pnTrangTruoc;
     private javax.swing.JPanel pnXoa;
-    private javax.swing.JSpinner spinSoLopTao;
     private javax.swing.JTable tblMonHoc;
     private javax.swing.JTable tblSinhVienLopDocLap;
     private javax.swing.JTextField txtMaMon;
+    private javax.swing.JTextField txtSoLopTao;
     private javax.swing.JTextField txtSoTin;
     private javax.swing.JTextField txtTenMon;
     private javax.swing.JTextField txtTuKhoa;
@@ -1909,14 +1908,19 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             int kyHoc = cbbKyHoc.getSelectedIndex() + 1;
             int namHoc = Integer.parseInt(cbbNamHoc.getSelectedItem().toString().trim());
             int soLopDaTao = LopDocLapDAO.getInstance().laySoLopDaTaoTheoMon(dsMonCbb.get(cbbTenMon.getSelectedIndex()), kyHoc, namHoc);
-            int soLop = Integer.parseInt(spinSoLopTao.getValue().toString().trim());
+            if (txtSoLopTao.getText().trim().equalsIgnoreCase("") ){
+                throw new Exception("Số lớp cần tạo không được rỗng!");
+            }
+            int soLop = Integer.parseInt(txtSoLopTao.getText().trim());
+            if (soLop<0) {
+                throw new Exception("Số lớp độc lập phải là số nguyên dương!");
+            }
             if (soLopDaTao == 0) {
                 LopDocLap lopDocLap = new LopDocLap(dsMonCbb.get(cbbTenMon.getSelectedIndex()), kyHoc, namHoc);
                 for (int i = 0; i < soLop; i++) {
                     Controller.getInstance().themMoi(lopDocLap);
                 }
                 JOptionPane.showMessageDialog(rootPane, "Tạo thành công lớp độc lập!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
             } else {
                 if (soLop < soLopDaTao) {
                     ArrayList<LopDocLap> dsLopDocLapChuaCoDiem
@@ -1943,7 +1947,9 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             layDsTheoTrang(trangHienTai);
             loadDuLieu();
             dialogSinhLopDocLap.setVisible(false);
-        } catch (HeadlessException | NumberFormatException e) {
+        }catch(ParseException ex){
+            JOptionPane.showMessageDialog(rootPane, "Số lớp cần tạo là số nguyên dương!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1953,6 +1959,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             int kyHoc = cbbKyHoc.getSelectedIndex() + 1;
             int namHoc = Integer.parseInt(cbbNamHoc.getSelectedItem().toString().trim());
             int soLopDaTao = LopDocLapDAO.getInstance().laySoLopDaTaoTheoMon(dsMonCbb.get(cbbTenMon.getSelectedIndex()), kyHoc, namHoc);
+            txtSoLopTao.setText(soLopDaTao+"");
             lblSoLopDaTao.setText("Số lớp đã tạo: " + soLopDaTao);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
