@@ -2071,6 +2071,8 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 check = 1;
             } else if (diemTL[i] < 1 && diemTL[i + 1] < 1) {
                 check = 1;
+            } else if (dsTichLuy.get(i).tongTinChi < 12) {
+                check = 1;
             }
         }
 
