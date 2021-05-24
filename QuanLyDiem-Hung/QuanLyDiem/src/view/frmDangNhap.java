@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.lang.model.SourceVersion;
+import javax.swing.JPopupMenu;
 import ui.RoundedPanel;
 
 public class FrmDangNhap extends javax.swing.JFrame {
@@ -340,6 +341,10 @@ public class FrmDangNhap extends javax.swing.JFrame {
             }
 
             TaiKhoan tk = new TaiKhoan(id, pass);
+            if (TaiKhoanDAO.getInstance().kiemTraVoHieuHoa(tk)) {
+                JOptionPane.showMessageDialog(rootPane, "Tài khoản đã bị vô hiệu hóa","Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             if (!listTk.contains(tk)) {
                 throw new Exception("Sai tên đăng nhập hoặc mật khẩu");
             }

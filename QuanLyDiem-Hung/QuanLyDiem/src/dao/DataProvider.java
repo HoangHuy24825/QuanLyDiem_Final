@@ -21,15 +21,15 @@ public class DataProvider {
 //    private final Stsame=sa; password=123456";
 //    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;"
 //            + "username=sa;password=123456";
-//    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;IntegratedSecurity=true;";
+    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;IntegratedSecurity=true;";
     private Connection connection = null;
 
     public void getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//            connection = DriverManager.getConnection(strConnection);
-            connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QuanLyDiem;"
-                    + "username=sa;password=haikhanh1");
+            connection = DriverManager.getConnection(strConnection);
+//            connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QuanLyDiem;"
+//                    + "username=sa;password=haikhanh1");
         } catch (SQLException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }

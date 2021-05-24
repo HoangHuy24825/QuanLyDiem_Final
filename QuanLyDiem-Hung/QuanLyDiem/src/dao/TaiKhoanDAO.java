@@ -113,4 +113,19 @@ public class TaiKhoanDAO {
             return false;
         }
     }
+    
+    public boolean kiemTraVoHieuHoa(TaiKhoan tk) {
+        try {
+            String query = "SELECT COUNT(*) AS 'soBanGhi' FROM TaiKhoan WHERE isDisable = 1 AND id = '"+tk.getId()+"'";
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, (Object) null);
+            while (rs.next()) {
+                return rs.getInt("soBanGhi")>0;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            DataProvider.getInstance().closeConection();
+        }
+        return false;
+    }
 }
