@@ -58,7 +58,9 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
      * Khai bao danh sach, so trang, trang hien tai
      */
     private ArrayList<TaiKhoan> dsTKhoans = new ArrayList<>();
+    private ArrayList<TaiKhoan> dsTatCaTKhoans = new ArrayList<>();
     private ArrayList<Lop> dsLops = new ArrayList<>();
+    
     private int tongTrang = 0;
     private int trangHienTai = 1;
 
@@ -79,6 +81,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
         dialogTaiKhoan.setLocationRelativeTo(null);
         txtID.setEnabled(false);
         dsLops = LopDAO.getInstance().layDSLop();
+        dsTatCaTKhoans = TaiKhoanDAO.getInstance().layDSTatCaTaiKhoan();
         for (Lop l : dsLops) {
             cbbMaLop.addItem(l.getMaLop());
         }
@@ -917,7 +920,6 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnQuayLaiMouseClicked
 
     private void btnDieuKhienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDieuKhienMouseClicked
-        txtID.setEnabled(false);
         themSuaTaiKhoan();
     }//GEN-LAST:event_btnDieuKhienMouseClicked
 
@@ -1179,6 +1181,9 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             if (dialogType) {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setId(txtID.getText().trim());
+                if(dsTatCaTKhoans.contains(tk)){
+                    throw new Exception("Trùng tên tài khoản!");
+                }
                 tk.setLoaiTaiKhoan("Giảng viên");
                 tk.setPass("1");
                 tk.setTrangThai("Hoạt động");
@@ -1194,6 +1199,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
                 }
                 if (Controller.getInstance().themMoi(tk)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    txtID.setEnabled(false);
                     laySoTrang();
                     layDsTheoTrang(trangHienTai);
                     loadDuLieu();

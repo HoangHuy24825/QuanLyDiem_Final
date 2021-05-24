@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/QuanLyDiem/QuanLyDiem-Hung/QuanLyDiem/src/view/frmQuanLyDiem/FrmQuanLyDiem.java</file>
-            <file>file:/D:/QuanLyDiem/QuanLyDiem-Hung/QuanLyDiem/src/dao/DiemDAO.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/BTL2/QuanLyDiem_Final/QuanLyDiem-Hung/QuanLyDiem/src/view/FrmDangNhap.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/BTL2/QuanLyDiem_Final/QuanLyDiem-Hung/QuanLyDiem/src/dao/TaiKhoanDAO.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/BTL2/QuanLyDiem_Final/QuanLyDiem-Hung/QuanLyDiem/src/model/TaiKhoan.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/BTL2/QuanLyDiem_Final/QuanLyDiem-Hung/QuanLyDiem/src/view/frmQuanLyTaiKhoan/FrmQuanLyTaiKhoan.java</file>
         </group>
     </open-files>
 </project-private>

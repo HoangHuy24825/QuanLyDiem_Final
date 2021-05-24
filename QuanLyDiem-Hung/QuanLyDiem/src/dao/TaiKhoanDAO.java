@@ -37,6 +37,23 @@ public class TaiKhoanDAO {
         return listTK;
     }
 
+    public ArrayList<TaiKhoan> layDSTatCaTaiKhoan(){
+        ArrayList<TaiKhoan> listTK = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM TaiKhoan,Lop WHERE TaiKhoan.maLop=Lop.maLop";
+            ResultSet rs = DataProvider.getInstance().executeQuery(query, (Object) null);
+            while (rs.next()) {
+                TaiKhoan tk = new TaiKhoan(rs);
+                listTK.add(tk);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            DataProvider.getInstance().closeConection();
+        }
+        return listTK;
+    }
+    
     public ArrayList<TaiKhoan> layTaiKhoanTheoID(String id) throws SQLException {
         ArrayList<TaiKhoan> listTK = new ArrayList<>();
         try {
