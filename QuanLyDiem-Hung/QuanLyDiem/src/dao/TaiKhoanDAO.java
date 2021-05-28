@@ -20,7 +20,7 @@ public class TaiKhoanDAO {
         return instance;
     }
 
-    public ArrayList<TaiKhoan> layDSTaiKhoan() throws SQLException {
+    public ArrayList<TaiKhoan> layDSTaiKhoan(){
         ArrayList<TaiKhoan> listTK = new ArrayList<>();
         try {
             String query = "SELECT * FROM TaiKhoan,Lop WHERE isDisable = 0 AND TaiKhoan.maLop=Lop.maLop";
@@ -54,7 +54,7 @@ public class TaiKhoanDAO {
         return listTK;
     }
     
-    public ArrayList<TaiKhoan> layTaiKhoanTheoID(String id) throws SQLException {
+    public ArrayList<TaiKhoan> layTaiKhoanTheoID(String id) {
         ArrayList<TaiKhoan> listTK = new ArrayList<>();
         try {
             String query = "SELECT * FROM TaiKhoan,Lop WHERE loaiTaiKhoan = 0 AND TaiKhoan.maLop=Lop.maLop AND id LIKE ? ";

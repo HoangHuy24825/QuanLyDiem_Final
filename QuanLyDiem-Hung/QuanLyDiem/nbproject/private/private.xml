@@ -5,8 +5,13 @@
         <group>
             <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/view/frmQuanLySinhVien/FrmQuanLySinhVien.java</file>
             <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/view/FrmDangNhap.java</file>
+            <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/SinhVienDAO.java</file>
+            <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/DiemDAO.java</file>
+            <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/LopDocLapDAO.java</file>
+            <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/LopDAO.java</file>
             <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/DataProvider.java</file>
             <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/TaiKhoanDAO.java</file>
+            <file>file:/C:/Users/hoang/Desktop/Java_merge_final/QuanLyDiem-Hung/QuanLyDiem/src/dao/MonDAO.java</file>
         </group>
     </open-files>
 </project-private>
