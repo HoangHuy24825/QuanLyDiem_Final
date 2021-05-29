@@ -205,6 +205,8 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         btnLamMoi = new javax.swing.JLabel();
         pnData = new javax.swing.JPanel();
         pnTbl = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSinhVien = new javax.swing.JTable();
         pnPhanTrang = new javax.swing.JPanel();
         pnTrangDau = new RoundedPanel(30);
         btnTrangDau = new javax.swing.JLabel();
@@ -216,8 +218,6 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         btnTrangSau = new javax.swing.JLabel();
         pnTrangCuoi = new RoundedPanel(30);
         btnTrangCuoi = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblSinhVien = new javax.swing.JTable();
 
         dialogSinhVien.setBackground(new java.awt.Color(255, 255, 255));
         dialogSinhVien.setMinimumSize(new java.awt.Dimension(730, 540));
@@ -947,15 +947,47 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
 
         pnTbl.setBackground(new java.awt.Color(179, 213, 241));
 
+        tblSinhVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblSinhVien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblSinhVien.setFocusable(false);
+        tblSinhVien.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblSinhVien.setRowHeight(30);
+        tblSinhVien.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblSinhVien.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblSinhVien.setShowVerticalLines(false);
+        tblSinhVien.getTableHeader().setReorderingAllowed(false);
+        tblSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSinhVienMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblSinhVien);
+
         javax.swing.GroupLayout pnTblLayout = new javax.swing.GroupLayout(pnTbl);
         pnTbl.setLayout(pnTblLayout);
         pnTblLayout.setHorizontalGroup(
             pnTblLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnTblLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE))
         );
         pnTblLayout.setVerticalGroup(
             pnTblLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
+            .addGroup(pnTblLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTblLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)))
         );
 
         pnPhanTrang.setBackground(new java.awt.Color(179, 213, 241));
@@ -1135,48 +1167,17 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
 
         pnPhanTrang.add(pnTrangCuoi);
 
-        tblSinhVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tblSinhVien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblSinhVien.setFocusable(false);
-        tblSinhVien.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblSinhVien.setRowHeight(30);
-        tblSinhVien.setSelectionBackground(new java.awt.Color(232, 57, 95));
-        tblSinhVien.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblSinhVien.setShowVerticalLines(false);
-        tblSinhVien.getTableHeader().setReorderingAllowed(false);
-        tblSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSinhVienMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblSinhVien);
-
         javax.swing.GroupLayout pnDataLayout = new javax.swing.GroupLayout(pnData);
         pnData.setLayout(pnDataLayout);
         pnDataLayout.setHorizontalGroup(
             pnDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDataLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnTbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnPhanTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnPhanTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
+            .addComponent(pnTbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnDataLayout.setVerticalGroup(
             pnDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDataLayout.createSequentialGroup()
-                .addGroup(pnDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnTbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
+                .addComponent(pnTbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnPhanTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

@@ -1040,7 +1040,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
                 });
             }
             txtTuKhoa.setText("");
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(FrmQuanLyTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTimKiemMouseClicked
