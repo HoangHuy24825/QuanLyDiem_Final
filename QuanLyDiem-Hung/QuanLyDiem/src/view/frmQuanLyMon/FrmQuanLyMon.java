@@ -1467,7 +1467,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 throw new Exception("Vui lòng nhập từ khóa cần tìm kiếm!");
             }
             tongTrang = MonDAO.getInstance().layTongSoBanGhiTimKiem(tuKhoa);
-            if(tongTrang == 0) {
+            if (tongTrang == 0) {
                 throw new Exception("Không tìm thấy dữ liệu trong bảng");
             }
             tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
@@ -1777,7 +1777,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 if (strTinChi.equals("")) {
                     throw new Exception("Số tín chỉ không được rỗng");
                 }
-                mon.setSoTin(Float.parseFloat(strTinChi));
+                mon.setSoTin(Integer.parseInt(strTinChi));
                 if (Controller.getInstance().themMoi(mon)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     laySoTrang();
@@ -1797,7 +1797,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 if (strTinChi.equals("")) {
                     throw new Exception("Số tín chỉ không được rỗng");
                 }
-                mon.setSoTin(Float.parseFloat(strTinChi));
+                mon.setSoTin(Integer.parseInt(strTinChi));
                 if (Controller.getInstance().capNhat(mon)) {
                     JOptionPane.showMessageDialog(null, "Sửa thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     laySoTrang();
@@ -1810,6 +1810,8 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 }
                 dialogMonHoc.setVisible(false);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số tín chỉ phải là số nguyên dương!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
@@ -1910,11 +1912,11 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             int kyHoc = cbbKyHoc.getSelectedIndex() + 1;
             int namHoc = Integer.parseInt(cbbNamHoc.getSelectedItem().toString().trim());
             int soLopDaTao = LopDocLapDAO.getInstance().laySoLopDaTaoTheoMon(dsMonCbb.get(cbbTenMon.getSelectedIndex()), kyHoc, namHoc);
-            if (txtSoLopTao.getText().trim().equalsIgnoreCase("") ){
+            if (txtSoLopTao.getText().trim().equalsIgnoreCase("")) {
                 throw new Exception("Số lớp cần tạo không được rỗng!");
             }
             int soLop = Integer.parseInt(txtSoLopTao.getText().trim());
-            if (soLop<=0) {
+            if (soLop <= 0) {
                 throw new Exception("Số lớp độc lập phải là số nguyên dương!");
             }
             if (soLopDaTao == 0) {
@@ -1949,7 +1951,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             layDsTheoTrang(trangHienTai);
             loadDuLieu();
             dialogSinhLopDocLap.setVisible(false);
-        }catch(ParseException ex){
+        } catch (ParseException ex) {
             JOptionPane.showMessageDialog(rootPane, "Số lớp cần tạo là số nguyên dương!", "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1961,7 +1963,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
             int kyHoc = cbbKyHoc.getSelectedIndex() + 1;
             int namHoc = Integer.parseInt(cbbNamHoc.getSelectedItem().toString().trim());
             int soLopDaTao = LopDocLapDAO.getInstance().laySoLopDaTaoTheoMon(dsMonCbb.get(cbbTenMon.getSelectedIndex()), kyHoc, namHoc);
-            txtSoLopTao.setText(soLopDaTao+"");
+            txtSoLopTao.setText(soLopDaTao + "");
             lblSoLopDaTao.setText("Số lớp đã tạo: " + soLopDaTao);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);

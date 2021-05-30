@@ -7,7 +7,7 @@ public final class Mon {
 
     private int maMon;
     private String tenMon;
-    private float soTin;
+    private int soTin;
 
     public int getMaMon() {
         return maMon;
@@ -17,7 +17,7 @@ public final class Mon {
         return tenMon;
     }
 
-    public float getSoTin() {
+    public int getSoTin() {
         return soTin;
     }
 
@@ -33,7 +33,7 @@ public final class Mon {
         }
     }
 
-    public void setSoTin(float soTin) throws Exception {
+    public void setSoTin(int soTin) throws Exception {
         if (soTin < 1 || soTin > 10) {
             throw new Exception("Số tín phải thuộc đoạn [1-10]!");
         } else {
@@ -41,7 +41,7 @@ public final class Mon {
         }
     }
 
-    public Mon(int maMon, String tenMon, float soTin) {
+    public Mon(int maMon, String tenMon, int soTin) {
         this.maMon = maMon;
         this.tenMon = tenMon;
         this.soTin = soTin;
@@ -51,7 +51,7 @@ public final class Mon {
         try {
             setMaMon(set.getInt("maMon"));
             setTenMon(set.getString("tenMon").trim());
-            setSoTin(set.getFloat("soTin"));
+            setSoTin(set.getInt("soTin"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
