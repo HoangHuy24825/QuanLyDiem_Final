@@ -1914,7 +1914,7 @@ public class FrmQuanLyMon extends javax.swing.JInternalFrame {
                 throw new Exception("Số lớp cần tạo không được rỗng!");
             }
             int soLop = Integer.parseInt(txtSoLopTao.getText().trim());
-            if (soLop<0) {
+            if (soLop<=0) {
                 throw new Exception("Số lớp độc lập phải là số nguyên dương!");
             }
             if (soLopDaTao == 0) {
