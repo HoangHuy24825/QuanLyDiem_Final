@@ -925,6 +925,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         try {
+            dialogType = false;
             selectedRow = tblTaiKhoan.getSelectedRow();
             if (selectedRow < 0 || selectedRow > dsTKhoans.size()) {
                 throw new Exception("Vui lòng chọn bản ghi cần sửa!");
@@ -934,7 +935,6 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             cbbMaLop.setSelectedItem(tk.getLop().getMaLop());
             btnDieuKhien.setIcon(iconSua);
             dialogTaiKhoan.setVisible(true);
-            dialogType = false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
@@ -1181,8 +1181,9 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
             if (dialogType) {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setId(txtID.getText().trim());
-                if(dsTatCaTKhoans.contains(tk)){
-                    throw new Exception("Trùng tên tài khoản!");
+                for(TaiKhoan t : dsTatCaTKhoans){
+                    if(t.getId().equals(tk.getId()))
+                        throw new Exception("Trùng tên tài khoản!");
                 }
                 tk.setLoaiTaiKhoan("Giảng viên");
                 tk.setPass("1");
@@ -1199,6 +1200,7 @@ public class FrmQuanLyTaiKhoan extends javax.swing.JInternalFrame {
                 }
                 if (Controller.getInstance().themMoi(tk)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    dsTatCaTKhoans = TaiKhoanDAO.getInstance().layDSTatCaTaiKhoan();
                     txtID.setEnabled(false);
                     laySoTrang();
                     layDsTheoTrang(trangHienTai);

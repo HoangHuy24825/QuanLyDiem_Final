@@ -345,6 +345,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Tài khoản đã bị vô hiệu hóa","Thông báo",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
+            int d = 0;
             if (!listTk.contains(tk)) {
                 throw new Exception("Sai tên đăng nhập hoặc mật khẩu");
             }
