@@ -19,9 +19,9 @@ public class DataProvider {
     private DataProvider() {
     } 
 //    private final Stsame=sa; password=123456";
-//    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;"
-//            + "username=sa;password=123456";
-    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;IntegratedSecurity=true;";
+    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;"
+            + "username=sa;password=123456";
+//    private final String strConnection= "jdbc:sqlserver://localhost;databaseName=QuanLyDiem;IntegratedSecurity=true;";
     private Connection connection = null;
 
     public void getConnection() {

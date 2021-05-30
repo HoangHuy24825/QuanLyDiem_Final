@@ -2086,6 +2086,8 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
     }
 
     public void lamMoi() {
+        khoiTaoDialogVaForm();
+        hienThiMaLopDocLapForm();
         dangTimKiem = false;
         txtTuKhoa.setText("");
         laySoTrang(dsMon.get(cbbTenMon.getSelectedIndex()).getTenMon(), dsLopDocLap.get(cbbMaLopDocLap.getSelectedIndex()).getMaLopDocLap());

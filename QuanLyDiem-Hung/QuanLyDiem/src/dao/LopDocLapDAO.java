@@ -115,7 +115,7 @@ public class LopDocLapDAO {
     public ArrayList<LopDocLap> layKyHocTheoMonVaNam(String tenMon, int namHoc) {
         ArrayList<LopDocLap> dsLopDocLap = new ArrayList<>();
         try {
-            String query = "SELECT kyHoc FROM LopDocLap " +
+            String query = "SELECT DISTINCT kyHoc FROM LopDocLap " +
                            "INNER JOIN Mon ON Mon.maMon=LopDocLap.maMon " +
                            "WHERE tenMon = N'" + tenMon + "' AND namHoc = '" + namHoc + "' ORDER BY kyHoc ";
             ResultSet rs = DataProvider.getInstance().executeQuery(query, (Object) null);
