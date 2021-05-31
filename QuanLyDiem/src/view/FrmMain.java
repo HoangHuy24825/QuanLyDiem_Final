@@ -1376,7 +1376,7 @@ public class FrmMain extends javax.swing.JFrame {
             String nlMK = String.valueOf(txtNhapLaiMK.getPassword());
             if (tk.getPass().equals(mkCu)) {
                 if (mkMoi.equals(mkCu)) {
-                    throw new Exception("Mật khảu mới không thê trùng với mật khẩu cũ");
+                    throw new Exception("Mật khảu mới không thể trùng với mật khẩu cũ");
                 }
                 if (!mkMoi.equals(nlMK)) {
                     throw new Exception("Mật khẩu không khớp !");
