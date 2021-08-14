@@ -112,14 +112,19 @@ public class DiemDAO {
     public ArrayList<Diem> layTTDiemTheoTrangTimKiem(String maLopGV, int trangHienTai, String tuKhoa) {
         ArrayList<Diem> dsDiem = new ArrayList<>();
         try {
-            String query = "SELECT TOP(15) * "
+            String query = "SELECT TOP(15) * FROM Diem inner join SinhVien ON Diem.maSinhVien=SinhVien.maSinhVien "
+                    + "INNER JOIN LopDocLap ON Diem.maLopDocLap = LopDocLap.maLopDocLap "
+                    + "INNER JOIN Mon ON LopDocLap.maMon = Mon.maMon "
+                    + "INNER JOIN Lop ON Lop.maLop = SinhVien.maLop "
+                    + "WHERE SinhVien.maLop = '" + maLopGV + "' AND maDiem NOT IN (SELECT TOP (" + (trangHienTai * 15 - 15) + ") maDiem "
                     + "FROM Diem inner join SinhVien ON Diem.maSinhVien=SinhVien.maSinhVien "
                     + "INNER JOIN LopDocLap ON Diem.maLopDocLap = LopDocLap.maLopDocLap "
                     + "INNER JOIN Mon ON LopDocLap.maMon = Mon.maMon "
                     + "INNER JOIN Lop ON Lop.maLop = SinhVien.maLop "
-                    + "WHERE SinhVien.maLop = ? AND (Diem.maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE N'%" + tuKhoa + "%') "
-                    + "OR (tenMon LIKE N'%" + tuKhoa + "%') OR (hocKy LIKE '%" + tuKhoa + "%') AND "
-                    + "maDiem NOT IN (SELECT TOP (" + (trangHienTai * 15 - 15) + ") maDiem FROM Diem) ";
+                    + "WHERE SinhVien.maLop = '" + maLopGV + "' AND (Diem.maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE N'%" + tuKhoa + "%') "
+                    + "OR (tenMon LIKE N'%" + tuKhoa + "%') OR (hocKy LIKE N'%" + tuKhoa + "%')) "
+                    + "AND (Diem.maSinhVien LIKE '%" + tuKhoa + "%') OR (tenSinhVien LIKE N'%" + tuKhoa + "%') "
+                    + "OR (tenMon LIKE N'%" + tuKhoa + "%') OR (hocKy LIKE '%" + tuKhoa + "%') ";
             ResultSet rs = DataProvider.getInstance().executeQuery(query, maLopGV);
             while (rs.next()) {
                 Diem diem = new Diem(rs);

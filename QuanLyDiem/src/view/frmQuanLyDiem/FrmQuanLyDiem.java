@@ -1325,6 +1325,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             txtTenSinhVien.setText(diem.getSinhVien().getTenSinhVien());
             txtTenSinhVien.setEditable(false);
             cbbMon.setSelectedItem(diem.getLopDocLap().getMon().getTenMon());
+            hienThiHocKySV(diem.getSinhVien().getMaSinhVien());
             cbbHocKy.setSelectedItem(String.valueOf(diem.getHocKy()));
             hienThiTTLopDL();
             txtDiemHS2.setText(String.valueOf(diem.getDiemHS2()));
@@ -1332,7 +1333,6 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
             txtDiemTX1.setText(String.valueOf(diem.getDiemTX1()));
             txtDiemTX2.setText(String.valueOf(diem.getDiemTX2()));
             btnDieuKhien.setIcon(iconSua);
-            hienThiHocKySV(diem.getSinhVien().getMaSinhVien());
             dialogDiem.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1406,7 +1406,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 throw new Exception("Vui lòng nhập từ khóa cần tìm kiếm!");
             }
             tongTrang = DiemDAO.getInstance().layTongSoBanGhiTimKiem(maLopGV, tuKhoa);
-            if(tongTrang == 0) {
+            if (tongTrang == 0) {
                 throw new Exception("Không tìm thấy dữ liệu trong bảng");
             }
             tongTrang = tongTrang % 15 == 0 ? tongTrang / 15 : tongTrang / 15 + 1;
@@ -1785,7 +1785,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                     throw new Exception("Tên sinh viên không được để trống");
                 }
                 if (cbbNamTao.getItemCount() == 0) {
-                    throw new Exception("Không có lớp độc lập cho môn này");
+                    throw new Exception("Không có lớp độc lập cho môn " + cbbMon.getItemAt(cbbMon.getSelectedIndex()));
                 }
                 if (txtDiemTX1.getText().trim().equals("")) {
                     throw new Exception("Điểm thường xuyên 1 không được để trống");
@@ -1846,7 +1846,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                     throw new Exception("Tên sinh viên không được để trống");
                 }
                 if (cbbNamTao.getItemCount() == 0) {
-                    throw new Exception("Không có lớp độc lập cho môn này");
+                    throw new Exception("Không có lớp độc lập cho môn " + cbbMon.getItemAt(cbbMon.getSelectedIndex()));
                 }
                 if (txtDiemTX1.getText().trim().equals("")) {
                     throw new Exception("Điểm thường xuyên 1 không được để trống");
@@ -2071,7 +2071,7 @@ public class FrmQuanLyDiem extends javax.swing.JInternalFrame {
                 check = 1;
             } else if (diemTL[i] < 1 && diemTL[i + 1] < 1) {
                 check = 1;
-            } else if (dsTichLuy.get(i).tongTinChi < 12) {
+            } else if (dsTichLuy.get(i).getTongTinChi() < 12 && dsTichLuy.get(i + 1).getTongTinChi() < 12) {
                 check = 1;
             }
         }

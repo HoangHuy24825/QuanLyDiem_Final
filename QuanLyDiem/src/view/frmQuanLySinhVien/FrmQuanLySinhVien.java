@@ -413,6 +413,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
         txtDiaChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtDiaChi.setPreferredSize(new java.awt.Dimension(300, 30));
 
+        dchNgaySinh.setDateFormatString("dd/MM/yyyy");
         dchNgaySinh.setPreferredSize(new java.awt.Dimension(300, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -523,7 +524,7 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cobTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1761,11 +1762,16 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
                 sv.setNgaySinh(dchNgaySinh.getDate());
                 if (radNam.isSelected()) {
                     sv.setGioiTinh("Nam");
-                } else {
+                } else if(radNu.isSelected()){
                     sv.setGioiTinh("Nữ");
+                } else{
+                     throw new Exception("Chưa chọn giới tính!");
                 }
                 sv.setDiaChi(txtDiaChi.getText().trim());
                 sv.setTrangThai(cobTrangThai.getSelectedIndex());
+                                if(anhSinhVien==null){
+                    throw new Exception("Chưa chọn ảnh!");
+                }
                 sv.setAnh(anhSinhVien);
                 if (Controller.getInstance().themMoi(sv)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -1870,10 +1876,14 @@ public class FrmQuanLySinhVien extends javax.swing.JInternalFrame {
             soTin += d.getTongTinChi();
             diemTB += d.getTbcHocKy() * d.getTongTinChi();
         }
+        
         float diemTichLuy = diemTB / soTin;
-
+        
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
+        if(soTin == 0){
+            diemTichLuy = 0;
+        }
         txtDiemTBCTichLuy.setText("Điểm trung bình chung tích lũy: " + df.format(diemTichLuy));
 
         for (int i = 0; i < tblKQHocTap.getColumnCount(); i++) {
